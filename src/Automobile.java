@@ -19,22 +19,29 @@ public class Automobile implements Runnable {
 
             TimeUnit.SECONDS.sleep(random.nextInt(3));
 
-            System.out.println(nome + " sta arrivando al parcheggio");
+            System.out.println(this.toString() + " sta arrivando al parcheggio");
 
-            final Integer POSTO = parcheggio.richiediPosto();
+            final Posto POSTO = parcheggio.richiediPosto();
 
             TimeUnit.SECONDS.sleep(random.nextInt(3));
 
-            System.out.println(nome + " sta sostando nel parcheggio al posto n." + POSTO);
+            System.out.println(this.toString() + " sta sostando nel parcheggio al " + POSTO.toString());
 
             TimeUnit.SECONDS.sleep(random.nextInt(5));
 
             parcheggio.rilasciaPosto(POSTO);
-            System.out.println(nome + " ha liberato il posto n." + POSTO + " ed è uscita dal parcheggio");
+            System.out.println(this.toString() + " ha liberato il " + POSTO.toString() + " ed è uscita dal parcheggio");
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Automobile " + nome;
+    }
+
+    
 
 }
