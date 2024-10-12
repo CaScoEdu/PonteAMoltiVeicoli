@@ -2,28 +2,28 @@ import java.util.concurrent.TimeUnit;
 
 public class Automobile implements Runnable {
     private String nome;
-    private Semaforo semaforoPonte;
-
-    public Automobile(String nome, Semaforo semaforoPonte) {
+    private Semaforo semaforoParcheggio;
+    
+    public Automobile(String nome, Semaforo semaforoParcheggio) {
         this.nome = nome;
-        this.semaforoPonte = semaforoPonte;
+        this.semaforoParcheggio = semaforoParcheggio;
     }
 
     @Override
     public void run() {
 
         try {
-            System.out.println(nome + " sta arrivando al ponte");
-            semaforoPonte.attendi();
+            System.out.println(nome + " sta arrivando al parcheggio");
+            semaforoParcheggio.attendi();
 
             TimeUnit.SECONDS.sleep(1);
 
-            System.out.println(nome + " sta passando il ponte");
+            System.out.println(nome + " sta sostando al parcheggio");
 
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(5);
 
-            semaforoPonte.segnala();
-            System.out.println(nome + " ha attraversato il ponte");
+            semaforoParcheggio.segnala();
+            System.out.println(nome + " è uscita dal parcheggio");
 
         } catch (InterruptedException e) {
             e.printStackTrace();
