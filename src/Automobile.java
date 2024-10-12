@@ -1,29 +1,36 @@
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Automobile implements Runnable {
     private String nome;
-    private Semaforo semaforoParcheggio;
+    private Parcheggio parcheggio;
     
-    public Automobile(String nome, Semaforo semaforoParcheggio) {
+    public Automobile(String nome, Parcheggio parcheggio) {
         this.nome = nome;
-        this.semaforoParcheggio = semaforoParcheggio;
+        this.parcheggio = parcheggio;
     }
 
     @Override
     public void run() {
 
         try {
+
+            Random random = new Random();
+
+            TimeUnit.SECONDS.sleep(random.nextInt(3));
+
             System.out.println(nome + " sta arrivando al parcheggio");
-            semaforoParcheggio.attendi();
 
-            TimeUnit.SECONDS.sleep(1);
+            final Integer POSTO = parcheggio.richiediPosto();
 
-            System.out.println(nome + " sta sostando al parcheggio");
+            TimeUnit.SECONDS.sleep(random.nextInt(3));
 
-            TimeUnit.SECONDS.sleep(5);
+            System.out.println(nome + " sta sostando nel parcheggio al posto n." + POSTO);
 
-            semaforoParcheggio.segnala();
-            System.out.println(nome + " è uscita dal parcheggio");
+            TimeUnit.SECONDS.sleep(random.nextInt(5));
+
+            parcheggio.rilasciaPosto(POSTO);
+            System.out.println(nome + " ha liberato il posto n." + POSTO + " ed è uscita dal parcheggio");
 
         } catch (InterruptedException e) {
             e.printStackTrace();
