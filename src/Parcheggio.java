@@ -2,26 +2,26 @@ import java.util.ArrayList;
 
 public class Parcheggio {
 
-    private ArrayList<Posto> postiDisponibili = new ArrayList<Posto>();
+    final private ArrayList<Posto> POSTI_DISPONIBILI = new ArrayList<Posto>();
 
     public Parcheggio (int numeroPosti){
 
         for (int numero = 1; numero <= numeroPosti; numero++){
-            Posto posto = new Posto(numero);
-            postiDisponibili.add(posto);
+            final Posto POSTO = new Posto(numero);
+            POSTI_DISPONIBILI.add(POSTO);
         }
             
     }
 
     public synchronized Posto richiediPosto() throws InterruptedException{
-        while (postiDisponibili.size() == 0)
+        while (POSTI_DISPONIBILI.size() == 0)
             wait();
-        Posto postoAssegnato = postiDisponibili.removeFirst();
-        return postoAssegnato;
+        
+        return POSTI_DISPONIBILI.removeFirst();
     }
 
     public synchronized void rilasciaPosto(Posto posto){
-        postiDisponibili.add(posto);
+        POSTI_DISPONIBILI.add(posto);
         notify();
     }
 
