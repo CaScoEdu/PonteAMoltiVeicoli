@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class ParcheggioMonitor {
+public class ParcheggioConPostiRiservati { // realizzato con un Monitor
 
     final private ArrayList<Posto> POSTI_DISPONIBILI = new ArrayList<Posto>();
 
-    public ParcheggioMonitor (int numeroPosti){
+    public ParcheggioConPostiRiservati (int numeroPosti){
 
         for (int numero = 1; numero <= numeroPosti; numero++){
             final Posto POSTO = new Posto(numero);
