@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Automobile implements Runnable {
+
     private String nome;
     private Parcheggio parcheggio;
     
@@ -15,22 +16,21 @@ public class Automobile implements Runnable {
 
         try {
 
-            Random random = new Random();
+            final Random RANDOM = new Random();
 
-            TimeUnit.SECONDS.sleep(random.nextInt(3));
+            TimeUnit.SECONDS.sleep(RANDOM.nextInt(2));
 
-            System.out.println(this.toString() + " sta arrivando al parcheggio");
+            // richiesta posto
+            System.out.println(this.toString() + " sta richiedendo un posto al parcheggio");
+            final Posto POSTO = parcheggio.richiedi();
 
-            final Posto POSTO = parcheggio.richiediPosto();
-
-            TimeUnit.SECONDS.sleep(random.nextInt(3));
-
+            // utilizzo posto
             System.out.println(this.toString() + " sta sostando nel parcheggio al " + POSTO.toString());
+            TimeUnit.SECONDS.sleep(RANDOM.nextInt(5));
 
-            TimeUnit.SECONDS.sleep(random.nextInt(5));
-
-            parcheggio.rilasciaPosto(POSTO);
-            System.out.println(this.toString() + " ha liberato il " + POSTO.toString() + " ed è uscita dal parcheggio");
+            // rilascio posto
+            System.out.println(this.toString() + " sta liberando il " + POSTO.toString());
+            parcheggio.rilascia(POSTO);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -41,7 +41,5 @@ public class Automobile implements Runnable {
     public String toString() {
         return "Automobile " + nome;
     }
-
-    
 
 }

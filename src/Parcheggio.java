@@ -9,18 +9,18 @@ public class Parcheggio {
         for (int numero = 1; numero <= numeroPosti; numero++){
             final Posto POSTO = new Posto(numero);
             POSTI_DISPONIBILI.add(POSTO);
-        }
-            
+        }            
     }
 
-    public synchronized Posto richiediPosto() throws InterruptedException{
+    public synchronized Posto richiedi() throws InterruptedException{
+        
         while (POSTI_DISPONIBILI.size() == 0)
             wait();
         
         return POSTI_DISPONIBILI.removeFirst();
     }
 
-    public synchronized void rilasciaPosto(Posto posto){
+    public synchronized void rilascia(Posto posto){
         POSTI_DISPONIBILI.add(posto);
         notify();
     }
