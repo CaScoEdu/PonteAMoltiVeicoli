@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Parcheggio {
+public class ParcheggioMonitor {
 
     final private ArrayList<Posto> POSTI_DISPONIBILI = new ArrayList<Posto>();
 
-    public Parcheggio (int numeroPosti){
+    public ParcheggioMonitor (int numeroPosti){
 
         for (int numero = 1; numero <= numeroPosti; numero++){
             final Posto POSTO = new Posto(numero);

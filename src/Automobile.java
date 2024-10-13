@@ -4,9 +4,9 @@ import java.util.concurrent.TimeUnit;
 public class Automobile implements Runnable {
 
     private String nome;
-    private Parcheggio parcheggio;
+    private ParcheggioMonitor parcheggio;
     
-    public Automobile(String nome, Parcheggio parcheggio) {
+    public Automobile(String nome, ParcheggioMonitor parcheggio) {
         this.nome = nome;
         this.parcheggio = parcheggio;
     }
@@ -20,16 +20,16 @@ public class Automobile implements Runnable {
 
             TimeUnit.SECONDS.sleep(RANDOM.nextInt(2));
 
-            // richiesta posto
-            System.out.println(this.toString() + " sta richiedendo un posto al parcheggio");
-            final Posto POSTO = parcheggio.richiedi();
+            // richiesta parcheggio
+            System.out.println(this.toString() + " sta richiedendo un posto");
+            Posto POSTO = parcheggio.richiedi();
 
-            // utilizzo posto
-            System.out.println(this.toString() + " sta sostando nel parcheggio al " + POSTO.toString());
+            // utilizzo parcheggio
+            System.out.println(this.toString() + " sta sostando nel posto " + POSTO.toString());
             TimeUnit.SECONDS.sleep(RANDOM.nextInt(5));
 
-            // rilascio posto
-            System.out.println(this.toString() + " sta liberando il " + POSTO.toString());
+            // rilascio parcheggio
+            System.out.println(this.toString() + " sta liberando il posto " + POSTO.toString());
             parcheggio.rilascia(POSTO);
 
         } catch (InterruptedException e) {
